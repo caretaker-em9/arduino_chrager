@@ -232,16 +232,11 @@ function reset() {
 
     if [ "1" == $(git branch -vv | grep -cE "\* develop|\* stable") ]; then
         if check_git_changes; then
-            # Automatically remove all local changes without asking
-            git fetch -a
-
-            if [ "1" == $(git branch -vv | grep -c "* develop") ]; then
-                echo "- Hard resetting of 'develop' branch."
-                git reset --hard origin/develop
-            elif [ "1" == $(git branch -vv | grep -c "* stable") ]; then
-                echo "- Hard resetting of 'stable' branch."
-                git reset --hard origin/stable
-            fi
+            # Automatically keep local changes and skip reset
+            echo "Local changes detected. Keeping local changes."
+        else
+            # No changes detected; continue with reset (if desired)
+            echo "No local changes detected."
         fi
     else
         echo "Reset ignored because you are not on 'stable' or 'develop'."
@@ -250,6 +245,7 @@ function reset() {
 
     updateenv
 }
+
 
 
 
