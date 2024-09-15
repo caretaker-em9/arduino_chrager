@@ -224,31 +224,23 @@ function recreate_environments() {
         echo "Could not create virtual environment. Leaving now"
         exit 1
     fi
-
 }
 
 # Reset Develop or Stable branch
 function reset() {
-    echo_block "Resetting branch and virtual env"
+    echo "Resetting branch and virtual env"
 
-    if [ "1" == $(git branch -vv |grep -cE "\* develop|\* stable") ]
-    then
+    if [ "1" == $(git branch -vv | grep -cE "\* develop|\* stable") ]; then
         if check_git_changes; then
-            echo "Keep your local changes? (Otherwise will remove all changes you made!) [Y/n]? "
-            n="N"
-            if [[ $n =~ ^[Nn]$ ]]; then
+            # Automatically remove all local changes without asking
+            git fetch -a
 
-                git fetch -a
-
-                if [ "1" == $(git branch -vv | grep -c "* develop") ]
-                then
-                    echo "- Hard resetting of 'develop' branch."
-                    git reset --hard origin/develop
-                elif [ "1" == $(git branch -vv | grep -c "* stable") ]
-                then
-                    echo "- Hard resetting of 'stable' branch."
-                    git reset --hard origin/stable
-                fi
+            if [ "1" == $(git branch -vv | grep -c "* develop") ]; then
+                echo "- Hard resetting of 'develop' branch."
+                git reset --hard origin/develop
+            elif [ "1" == $(git branch -vv | grep -c "* stable") ]; then
+                echo "- Hard resetting of 'stable' branch."
+                git reset --hard origin/stable
             fi
         fi
     else
@@ -258,6 +250,8 @@ function reset() {
 
     updateenv
 }
+
+
 
 function config() {
     echo_block "Please use 'freqtrade new-config -c user_data/config.json' to generate a new configuration file."
