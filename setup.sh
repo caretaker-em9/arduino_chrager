@@ -57,7 +57,7 @@ function updateenv() {
     REQUIREMENTS=requirements.txt
 
     echo "Do you want to install dependencies for development (Performs a full install with all dependencies) [y/N]? "
-    dev=y
+    dev=Y
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
         :
