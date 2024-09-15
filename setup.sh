@@ -57,7 +57,7 @@ function updateenv() {
     REQUIREMENTS=requirements.txt
 
     echo "Do you want to install dependencies for development (Performs a full install with all dependencies) [y/N]? "
-    dev=Y
+    dev=y
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
         :
@@ -234,8 +234,9 @@ function reset() {
     if [ "1" == $(git branch -vv |grep -cE "\* develop|\* stable") ]
     then
         if check_git_changes; then
-            read -p "Keep your local changes? (Otherwise will remove all changes you made!) [Y/n]? "
-            if [[ $REPLY =~ ^[Nn]$ ]]; then
+            echo "Keep your local changes? (Otherwise will remove all changes you made!) [Y/n]? "
+            n="N"
+            if [[ $n =~ ^[Nn]$ ]]; then
 
                 git fetch -a
 
