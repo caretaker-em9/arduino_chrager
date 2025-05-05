@@ -2,6 +2,10 @@
 
 This project automates a laptop charger using an Arduino board and Python. It monitors the laptop battery level and intelligently switches the charger on or off using a relay, helping extend battery life and prevent overcharging.
 
+## Project Preview
+
+![Project Photo](prob.jpg)
+
 ---
 
 ## Features
