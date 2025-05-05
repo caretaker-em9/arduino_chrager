@@ -4,7 +4,7 @@ This project automates a laptop charger using an Arduino board and Python. It mo
 
 ## Project Preview
 
-![Project Photo](prob.jpg)
+![Project Photo](20240310_185803.jpg)
 
 ---
 
